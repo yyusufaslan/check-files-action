@@ -30,7 +30,7 @@ async function checkFileExists1() {
 }
 
 async function checkFileExists2() {
-    fs.readdir(__dirname, (err, files) => {
+    fs.readdir('/', (err, files) => {
         if (err)
             console.log(err);
         else {
