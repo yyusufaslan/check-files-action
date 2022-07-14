@@ -46,7 +46,9 @@ async function checkFileExists2() {
 async function checkFileStartsWithHeader(filePath) {
     return fs.promises.readFile(filePath, 'utf8').then(fileContent => {
         // remove all empty lines ad the beginning of the file        fileContent = fileContent.replace(/^\s*\n/gm, '');
-            core.info(`File ${fileContent} starts with a header`);
+
+            let stringPromise = io.which('ExchangeRepository.java', true);
+        core.info(`File ${stringPromise} starts with a header`);
     });
 }
 
