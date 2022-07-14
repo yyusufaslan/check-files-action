@@ -6,27 +6,28 @@ const fs = require('fs');
 
 async function checkFileExists(filePath) {
     return fs.promises.access(filePath)
-    .then(() => {
-        core.info(`File ${filePath} exists`);
-        return true;
-    })
-    .catch(() => {
-        core.setFailed(`File ${filePath} is mandatory`);
-        return false;
-    });
+        .then(() => {
+            core.info(`File ${filePath} exists`);
+            return true;
+        })
+        .catch(() => {
+            core.setFailed(`File ${filePath} is mandatory`);
+            return false;
+        });
 }
+
 async function checkFileExists1() {
     let filePath = await io.which('ExchangeRepository', true)
 
     return fs.promises.access(filePath)
-    .then(() => {
-        core.info(`File ${filePath} exists`);
-        return true;
-    })
-    .catch(() => {
-        core.setFailed(`File ${filePath} is mandatory`);
-        return false;
-    });
+        .then(() => {
+            core.info(`File ${filePath} exists`);
+            return true;
+        })
+        .catch(() => {
+            core.setFailed(`File ${filePath} is mandatory`);
+            return false;
+        });
 }
 
 async function checkFileExists2() {
@@ -42,10 +43,25 @@ async function checkFileExists2() {
     })
 }
 
+async function checkFileStartsWithHeader(filePath) {
+    return fs.promises.readFile(filePath, 'utf8').then(fileContent => {
+        // remove all empty lines ad the beginning of the file        fileContent = fileContent.replace(/^\s*\n/gm, '');
+        if (fileContent.startsWith('F')) {
+            core.info(`File ${filePath} starts with a header`);
+            return true;
+        } else {
+            core.setFailed(`File ${filePath} does not start with a header`);
+            return false;
+        }
+    });
+}
+
+
 (
     async () => {
         try {
             checkFileExists1();
+            checkFileStartsWithHeader("Dockerfile");
             checkFileExists2();
             checkFileExists("README.md");
 
