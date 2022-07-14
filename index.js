@@ -18,7 +18,7 @@ async function checkFileExists(filePath) {
 (
     async () => {
         try {
-            checkFileExists("ExchangeRepository.java");
+            checkFileExists("/src/main/java/com/integratedfinance/exchange/repository/ExchangeRepository.java");
             checkFileExists("README.md");
 
         } catch (error) {
