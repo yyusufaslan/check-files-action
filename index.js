@@ -46,7 +46,7 @@ async function checkFileExists2() {
 async function checkFileStartsWithHeader(filePath) {
     return fs.promises.readFile(filePath, 'utf8').then(fileContent => {
         // remove all empty lines ad the beginning of the file        fileContent = fileContent.replace(/^\s*\n/gm, '');
-        if (fileContent.endsWith(']')) {
+        if (fileContent.endsWith('<?xml')) {
             core.info(`File ${filePath} starts with a header`);
             return true;
         } else {
@@ -61,7 +61,7 @@ async function checkFileStartsWithHeader(filePath) {
     async () => {
         try {
             checkFileExists1();
-            checkFileStartsWithHeader("Dockerfile");
+            checkFileStartsWithHeader("pom.xml");
             checkFileExists2();
             checkFileExists("README.md");
 
