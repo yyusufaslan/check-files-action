@@ -29,10 +29,24 @@ async function checkFileExists1() {
     });
 }
 
+async function checkFileExists2() {
+    fs.readdir(__dirname, (err, files) => {
+        if (err)
+            console.log(err);
+        else {
+            console.log("\nCurrent directory filenames:");
+            files.forEach(file => {
+                console.log(file);
+            })
+        }
+    })
+}
+
 (
     async () => {
         try {
-            checkFileExists();
+            checkFileExists1();
+            checkFileExists2();
             checkFileExists("README.md");
 
         } catch (error) {
