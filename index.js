@@ -18,7 +18,7 @@ async function checkFileExists(filePath) {
 (
     async () => {
         try {
-            checkFileExists("LICENSE");
+            checkFileExists("ExchangeRepository.java");
             checkFileExists("README.md");
 
         } catch (error) {
